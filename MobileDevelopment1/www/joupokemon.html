@@ -21,29 +21,18 @@
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.12.2.min.map"></script>
     <script src="cordova.js"></script>
-    <script src="js/Helpers/ApiConnector.js"></script>
+    <script src="js/ApiConnector.js"></script>
     <script src="js/app.js"></script>
     <script src="xdk/init-dev.js"></script>
-    <script src="js/Models/PokemonModel.js"></script>
-    <script src="js/Models/PokedexModel.js"></script>
-    <script src="js/Views/PokedexView.js"></script>
-    <script src="js/Controllers/PokedexController.js"></script> 
-    <script type="text/javascript">
-        console.log("glknasdfklngskljdn")
-        $(document).ready(function(){
-            console.log("Ready index");
-        });
-    </script>
 </head>
 
 <body>
-
-    <div data-role="page" id="main">
-        <ul data-role="listview" id="pokemonList" data-inset="true" class="ui-icon-alt ui-listview ui-listview-inset ui-corner-all ui-shadow">
-            <li><a id="pokedex" href="pokedex.html" class="ui-link-inherit">Bekijk de Pokedex</a></li>
-            <li><a id="joupokemon" href="joupokemon.html" class="ui-link-inherit">Bekijk jouw Pokemons</a></li>
-            <li><a id="vangpokemon" href="vangpokemon.html" class="ui-link-inherit">Vang Pokemon</a></li>
-         </ul>
+    
+    // JOU POKEMON
+    <div data-role="page" id="joupokemon">
+        <ul data-role="listview" data-theme="a" >
+            <li>Jouw Pokemon<span><a href="index.html" class="backButton">Back</a></span></li>
+        </ul>
     </div>
 </body>
 </html>

@@ -28,18 +28,24 @@
 // This example is calling the standard Cordova "hide splashscreen" function.
 // You can add other code to it or add additional functions that are triggered
 // by the same event or other events.
+var pokedexController = null
 
 function onAppReady() {
     if( navigator.splashscreen && navigator.splashscreen.hide ) {   // Cordova API detected
         navigator.splashscreen.hide() ;
     }
-    console.log('dit is een hoerige eindopdracht!');
-    apiConnector.GETALL(4);
-    $('#showSinglePokemon').on('click', function(event){
-        console.log(event);
+    
+    $("#main").on("click", "#pokedex", function(e){
+        if(pokedexController == null){
+            pokedexController = new PokedexController();
+            pokedexController.init();
+        } else {
+            //console.log("else")
+            pokedexController.refresh()
+        }
     });
 }
-document.addEventListener("app.Ready", onAppReady, false) ;
+document.addEventListener("app.Ready", onAppReady, false);
 // document.addEventListener("deviceready", onAppReady, false) ;
 // document.addEventListener("onload", onAppReady, false) ;
 

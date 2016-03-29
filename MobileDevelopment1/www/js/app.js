@@ -40,7 +40,6 @@ function onAppReady() {
             pokedexController = new PokedexController();
             pokedexController.init();
         } else {
-            //console.log("else")
             pokedexController.refresh()
         }
     });

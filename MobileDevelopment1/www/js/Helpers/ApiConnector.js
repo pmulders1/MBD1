@@ -5,5 +5,10 @@ var apiConnector = {
 	    {
             callback(data);
 		});
+    },
+    GET: function(url, callback){
+        $.getJSON(url, function(data){
+            callback(data); 
+        });
     }
 }

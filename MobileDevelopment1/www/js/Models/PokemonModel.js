@@ -6,9 +6,6 @@ function PokemonModel(){
     self.url = null;
     
 	//Constructor
-	//self.init = function(){
-		
-	//}
 
 	//Methods
 	//self.getPokemon = function(){

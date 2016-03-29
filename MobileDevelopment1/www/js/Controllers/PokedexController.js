@@ -1,6 +1,9 @@
 function PokedexController(){
 	var self = this;
-
+    
+    //Variables
+    self.offset = 0;
+    
 	//Model
 	self.model = null;
 
@@ -17,7 +20,7 @@ function PokedexController(){
 
 	//Methods
 	self.getPokemon = function(){
-		apiConnector.GETALL(0, function(result){
+		apiConnector.GETALL(self.offset, function(result){
 			self.model = new PokedexModel(result);
 			self.view = new PokedexView(self.model);
 			self.view.Draw();
@@ -27,7 +30,7 @@ function PokedexController(){
     self.refresh = function(){
         self.getPokemon();
     }
-
+    
 	//$("#menu-toggle").click(function(e) {
         //e.preventDefault();
         //$("#wrapper").toggleClass("toggled");

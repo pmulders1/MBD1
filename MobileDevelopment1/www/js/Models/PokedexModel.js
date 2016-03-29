@@ -6,7 +6,6 @@ function PokedexModel(data){
 
 	//Constructor
 	self.init = function(data){
-        console.log(data)
         $.each(data.results, function(index, item){
             var pokemon = new PokemonModel();
             pokemon.name = item.name

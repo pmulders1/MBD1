@@ -2,7 +2,6 @@
  * Please see the included README.md file for license terms and conditions.
  */
 
-
 // This file is a suggested starting place for your code.
 // It is completely optional and not required.
 // Note the reference that includes it in the index.html file.
@@ -28,6 +27,7 @@
 // This example is calling the standard Cordova "hide splashscreen" function.
 // You can add other code to it or add additional functions that are triggered
 // by the same event or other events.
+
 var pokedexController = null;
 var pokemonController = null;
 function onAppReady() {
@@ -36,25 +36,26 @@ function onAppReady() {
     }
     pokemonController = new PokemonController();
     pokedexController = new PokedexController();
-    
-    $('body').on('click', '#single', function (event) {
-         event.preventDefault();
-         event.stopPropagation();
-         
-         //TODO update de pokemon
-         
-         pokemonController.getSinglePokemon($(this).attr('rel'));
-     });
 }
 document.addEventListener("app.Ready", onAppReady, false);
 
 // refresh als de pokedex page weergeven wordt
 $(document).on("pageshow","#pokedex",function(){
     $(document).on("scrollstop", pokedexController.checkScroll);
+    $('#pokedexContainer').on('click', '#single', function (event) {
+         event.preventDefault();
+         event.stopPropagation();
+         
+         pokedexController.getSinglePokemon($(this).attr('rel'));
+     });
     pokedexController.refresh();
 });
-
-
+$(document).on("pageshow","#singlepokemon",function(){
+    self.pokedexController.singleview.Draw();
+});
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 // document.addEventListener("deviceready", onAppReady, false) ;
 // document.addEventListener("onload", onAppReady, false) ;
 

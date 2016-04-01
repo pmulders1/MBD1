@@ -1,9 +1,13 @@
-function PokemonView(model){
+function PokemonView(){
 	var self = this;
 
-	self.model = model;
+	self.model = null;
     
 	self.Draw = function(){
-        console.log(self.model);
+        $('#pokemon-title').append(self.model.name);
+        $('#pokemon-name').html(self.model.name);
 	}
+    self.setModel= function(model){
+        self.model = model;
+    }
 }

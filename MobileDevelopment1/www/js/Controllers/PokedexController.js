@@ -1,25 +1,22 @@
 function PokedexController(){
 	var self = this;
 
-	//Model
 	self.model = null;
 
-	//Views
-	self.view = null;    
-
-	//Constructor
+	self.listview = null;    
+    self.singleview = null;
+    
 	self.init = function(){
         // Create models and views for this controller
         self.model = new PokedexModel();
-        self.view = new PokedexView(self.model);
-        
+        self.listview = new PokedexView(self.model);
+        self.singleview = new PokemonView();
         // Get innitial list of pokemon.
 		self.getPokemon(function(){
             self.getPokemon();
         });
 	}
 
-	//Methods
 	self.getPokemon = function(callback){
 
         // Check if you are not going to fetch the same pokemon again.
@@ -31,7 +28,7 @@ function PokedexController(){
                 // Loop trough results and add them to the model.
                 $.each(result.results, function(index, item){
                     var pokemon = new PokemonModel()
-                    pokemon.name = item.name;
+                    pokemon.name = capitalizeFirstLetter(item.name);
                     pokemon.url = item.url;
                     self.model.AddPokemon(pokemon);
                 });
@@ -45,7 +42,18 @@ function PokedexController(){
 	};
 
     self.refresh = function(){
-        self.view.DrawInitial();
+        if(self.model.offset + self.model.limit > self.model.pokemons.length){
+            self.listview.DrawInitial();
+        } else {
+            $.mobile.loading("show", {
+                text: "loading...",
+                textVisible: true
+            });
+            setTimeout(function() {
+                self.listview.DrawInitial();
+                $.mobile.loading("hide");
+            }, 1000);
+        }
     }
     
     self.checkScroll = function(){
@@ -60,21 +68,14 @@ function PokedexController(){
             self.addMore(activePage);
         }
     }
+    
     self.addMore = function(page){
         $(document).off("scrollstop");
-        //$.mobile.loading("show", {
-        //text: "loading more..",
-        //textVisible: true
-        //});
-        
-        
-        //setTimeout(function() {
         
         var last = $("li", page).length;
         var cont = last + self.model.limit - 1;
         
         if(last + self.model.limit - 1 > self.model.pokemons.length){
-            console.log('groter dan');
             $.mobile.loading("show", {
                 text: "loading more..",
                 textVisible: true
@@ -82,16 +83,27 @@ function PokedexController(){
             self.getPokemon(function(){
                 $.mobile.loading("hide");
                 self.getPokemon();
-                self.view.DrawMore(page, last, cont);
+                self.listview.DrawMore(page, last, cont);
             });
         }else{
-            console.log('kleiner dan');
             self.getPokemon();
-            self.view.DrawMore(page, last, cont);
+            self.listview.DrawMore(page, last, cont);
         }
         $(document).on("scrollstop", self.checkScroll);
-        //}, 500);
     }
-
+    
+    self.getSinglePokemon = function(index){
+        if(!self.model.pokemons[index].isCached){
+            apiConnector.GET(self.model.pokemons[index].url, function(result){
+                self.model.pokemons[index].updatePokemon(result);
+                $.mobile.pageContainer.pagecontainer("change", "singlepokemon.html");  
+                self.singleview.setModel(self.model.pokemons[index]);
+            });
+        }else{
+            $.mobile.pageContainer.pagecontainer("change", "singlepokemon.html");
+            self.singleview.setModel(self.model.pokemons[index]);
+        }
+	};
+    
 	self.init();
 };

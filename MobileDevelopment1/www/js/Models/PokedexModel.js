@@ -6,7 +6,7 @@ function PokedexModel(){
     
     self.offset = 0;
     self.limit = 20;
-
+    
 	//Constructor
 	self.init = function(){
         
@@ -15,7 +15,7 @@ function PokedexModel(){
     self.AddPokemon = function(pokemon){
         self.pokemons.push(pokemon);   
     } 
-               
+    
 	//Methods
 	//self.getPokemon = function(){
 		

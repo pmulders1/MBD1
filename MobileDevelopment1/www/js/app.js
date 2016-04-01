@@ -43,7 +43,6 @@ function onAppReady() {
             pokedexController.refresh()
         }
     });
-    
     $('body').on('click', '#single', function (event) {
         event.preventDefault();
         event.stopPropagation();

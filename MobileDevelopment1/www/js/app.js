@@ -50,6 +50,7 @@ document.addEventListener("app.Ready", onAppReady, false);
 
 // refresh als de pokedex page weergeven wordt
 $(document).on("pageshow","#pokedex",function(){
+    $(document).on("scrollstop", pokedexController.checkScroll);
     pokedexController.refresh();
 });
 

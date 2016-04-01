@@ -4,12 +4,20 @@ function PokedexView(model){
 	self.model = model;
     
 	self.DrawInitial = function(){
+        var items = '';
         for ( var i = 0; i < self.model.limit; i++ ) {
-            $("#pokedex-pokelist").append("<li><a rel='" + self.model.pokemons[i].url + "'>" + self.model.pokemons[i].name + "</a></li>").listview("refresh");
+            items += "<li><a rel='" + self.model.pokemons[i].url + "'>" + self.model.pokemons[i].name + "</a></li>";
         }
+        $("#pokedex-pokelist").append(items).listview("refresh");
 	}
     
-    self.DrawMore = function(){
-        console.log(self.model)
+    self.DrawMore = function(page, last, cont){
+        var items = '';
+        for (var i = last; i < cont; i++) {
+
+            items += "<li><a href='" + self.model.pokemons[i].url + "'>" + self.model.pokemons[i].name + "</a></li>";
+        }
+
+        $("#pokedex-pokelist", page).append(items).listview("refresh");
     }
 }

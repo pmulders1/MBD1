@@ -1,4 +1,4 @@
-function PokedexController(){
+function PokedexController(initcallback){
 	var self = this;
 
 	self.model = null;
@@ -6,43 +6,50 @@ function PokedexController(){
 	self.listview = null;    
     self.singleview = null;
     
-	self.init = function(){
+	self.init = function(initcallback){
         // Create models and views for this controller
         self.model = new PokedexModel();
         self.listview = new PokedexView(self.model);
         self.singleview = new PokemonView();
         // Get innitial list of pokemon.
-		self.getPokemon(function(){
-            self.getPokemon();
-        });
+		self.getAllPokemon(initcallback);
 	}
 
-	self.getPokemon = function(callback){
+	self.getAllPokemon = function(callback){
 
-        // Check if you are not going to fetch the same pokemon again.
-        if(self.model.offset + self.model.limit > self.model.pokemons.length){
-            
-            // Do the api call based on offset and limit.
-            apiConnector.GETALL(self.model.offset, self.model.limit, function(result){
+        // Do the api call based on offset and limit.
+        apiConnector.GETALL(0, 721, function(result){
 
-                // Loop trough results and add them to the model.
-                $.each(result.results, function(index, item){
-                    var pokemon = new PokemonModel()
-                    pokemon.name = capitalizeFirstLetter(item.name);
-                    pokemon.url = item.url;
-                    self.model.AddPokemon(pokemon);
-                });
-                self.model.offset = self.model.pokemons.length;
-
-                if(callback){
-                   callback(); 
-                }
+            // Loop trough results and add them to the model.
+            $.each(result.results, function(index, item){
+                var pokemon = new PokemonModel()
+                pokemon.name = capitalizeFirstLetter(item.name);
+                pokemon.url = item.url;
+                self.model.AddPokemon(pokemon);
             });
-        }
+            
+            
+            //self.cacheData();
+            console.log(window.localStorage.getItem("pokemons"));
+
+            if(callback){
+               callback(); 
+            }
+        });
 	};
+    
+    self.cacheData = function(){
+        var time = window.localStorage.getItem("pokemonsTime");
+        if(time != null && new Date(time) > new Date()){
+            
+        } else {
+            
+            window.localStorage.setItem("pokemonsTime", date);
+        }
+    }
 
     self.refresh = function(){
-        if(self.model.offset + self.model.limit > self.model.pokemons.length){
+        if(self.model.pokemons.length > 20){
             self.listview.DrawInitial();
         } else {
             $.mobile.loading("show", {
@@ -75,24 +82,24 @@ function PokedexController(){
         var last = $("li", page).length;
         var cont = last + self.model.limit - 1;
         
-        if(last + self.model.limit - 1 > self.model.pokemons.length){
+        if(self.model.pokemons.length < 20){
             $.mobile.loading("show", {
                 text: "loading more..",
                 textVisible: true
             });
-            self.getPokemon(function(){
-                $.mobile.loading("hide");
-                self.getPokemon();
+            setTimeout(function() {
                 self.listview.DrawMore(page, last, cont);
-            });
+                $.mobile.loading("hide");
+            }, 1000);
         }else{
-            self.getPokemon();
             self.listview.DrawMore(page, last, cont);
         }
         $(document).on("scrollstop", self.checkScroll);
     }
     
     self.getSinglePokemon = function(index){
+        
+        console.log(self.model.pokemons[index].isCached)
         if(!self.model.pokemons[index].isCached){
             apiConnector.GET(self.model.pokemons[index].url, function(result){
                 self.model.pokemons[index].updatePokemon(result);
@@ -103,7 +110,9 @@ function PokedexController(){
             $.mobile.pageContainer.pagecontainer("change", "singlepokemon.html");
             self.singleview.setModel(self.model.pokemons[index]);
         }
+        $.mobile.loading("hide");
 	};
+    
     self.getRandomPokemon = function(callback){
         var index = Math.floor(Math.random() * (151 - 1 + 1)) + 1;
         console.log(index);
@@ -118,5 +127,27 @@ function PokedexController(){
             }
         });
     };
-	self.init();
+    
+    // refresh als de pokedex page weergeven wordt
+    $(document).on("pageshow","#pokedex",function(){
+        $(document).on("scrollstop", self.checkScroll);
+        $('#pokedexContainer').on('click', '#single', function (event) {
+            //event.preventDefault();
+            //event.stopPropagation();
+            
+            $.mobile.loading("show", {
+                text: "Loading data...",
+                textVisible: true
+            });
+            
+            self.getSinglePokemon($(this).attr('rel'));
+         });
+        self.refresh();
+    });
+    
+    $(document).on("pageshow","#singlepokemon",function(){
+        self.singleview.Draw();
+    });
+    
+	self.init(initcallback);
 };

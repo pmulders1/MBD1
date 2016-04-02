@@ -42,14 +42,12 @@
         }
 
         function callback(results, status) {
-            setTimeout(function(){
-                if (status === google.maps.places.PlacesServiceStatus.OK) {
-                    console.log('hi');
-                    for (var i = 0; i < pokemonLocations.length; i++) {
-                        createMarker(pokemonLocations[i]);
-                    }
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                console.log('hi');
+                for (var i = 0; i < geoCachingController.model.caches.length; i++) {
+                    createMarker(geoCachingController.model.caches[i]);
                 }
-            }, 1000);
+            }
         }
 
         function createMarker(place) {

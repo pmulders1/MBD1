@@ -29,34 +29,37 @@
 // by the same event or other events.
 
 var pokedexController = null;
-var pokemonController = null;
+var geoCachingController = null;
+
 function onAppReady() {
     if( navigator.splashscreen && navigator.splashscreen.hide ) {   // Cordova API detected
         navigator.splashscreen.hide() ;
     }
-    pokemonController = new PokemonController();
-    pokedexController = new PokedexController();
+    
+    $.mobile.loading("show", {
+        text: "Please wait for innitial data...",
+        textVisible: true
+    });
+    
+    $(document).bind('pagebeforechange', function(e, data) {
+        e.preventDefault();
+        $.mobile.activePage.find('.ui-btn-active').removeClass('ui-btn-active');
+    });
+    
+    pokedexController = new PokedexController(function(){
+        geoCachingController = new GeoCachingController(function(){
+            $.mobile.loading("hide");
+            $(document).unbind('pagebeforechange');
+        });
+    });
 }
 document.addEventListener("app.Ready", onAppReady, false);
 
-// refresh als de pokedex page weergeven wordt
-$(document).on("pageshow","#pokedex",function(){
-    $(document).on("scrollstop", pokedexController.checkScroll);
-    $('#pokedexContainer').on('click', '#single', function (event) {
-         event.preventDefault();
-         event.stopPropagation();
-         
-         pokedexController.getSinglePokemon($(this).attr('rel'));
-     });
-    pokedexController.refresh();
-});
-$(document).on("pageshow","#singlepokemon",function(){
-    self.pokedexController.singleview.Draw();
-});
-
+// Public functions
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }

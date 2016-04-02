@@ -8,7 +8,7 @@ function PokemonModel(){
     self.isCatched = false;
     
     self.height = null;
-    self.width = null;
+    self.weight = null;
     
     self.sprite = null;
     
@@ -22,8 +22,9 @@ function PokemonModel(){
 	//Methods
 	self.updatePokemon = function(data){
 		self.isCached = true;
+        console.log(data);
         self.height = data.height;
-        self.width = data.width;
+        self.weight = data.weight;
         self.sprite = data.sprites.front_default;
         self.stats = data.stats;
         self.types = data.types;

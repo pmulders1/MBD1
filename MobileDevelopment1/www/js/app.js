@@ -53,8 +53,12 @@ $(document).on("pageshow","#pokedex",function(){
 $(document).on("pageshow","#singlepokemon",function(){
     self.pokedexController.singleview.Draw();
 });
+
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 // document.addEventListener("deviceready", onAppReady, false) ;
 // document.addEventListener("onload", onAppReady, false) ;

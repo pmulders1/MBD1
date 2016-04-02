@@ -104,6 +104,19 @@ function PokedexController(){
             self.singleview.setModel(self.model.pokemons[index]);
         }
 	};
-    
+    self.getRandomPokemon = function(callback){
+        var index = Math.floor(Math.random() * (151 - 1 + 1)) + 1;
+        console.log(index);
+        apiConnector.GET('http://pokeapi.co/api/v2/pokemon/' + index, function(result){
+            console.log(result);
+            var pokemon = new PokemonModel()
+            pokemon.name = capitalizeFirstLetter(result.name);
+            pokemon.url = result.url;
+            
+            if(callback){
+                callback(pokemon); 
+            }
+        });
+    };
 	self.init();
 };

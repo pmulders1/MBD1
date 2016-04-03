@@ -46,6 +46,40 @@
 #pokemon-types span:nth-child(2) {
     margin-left: 5%;
 }
+.costumPopup{
+    position: fixed;
+    top: 300px;
+    width: 99%;
+    height: 60px;
+    text-align: center;
+    background-color: #fff;
+    line-height: 30px;
+    border: 2px solid red;
+    border-radius: 5px;
+    display: none;
+}
+.isCatched{
+    background-image: url('http://orig12.deviantart.net/32d7/f/2011/257/9/d/pokeball_icon__by_kurisutikyo-d49v0cn.gif');
+    background-size: 21px 21px;
+    background-repeat: no-repeat;
+    width: 21px;
+    height: 21px;
+    float: right;
+}
+.pokemonCatched{
+    background-image: url('http://orig12.deviantart.net/32d7/f/2011/257/9/d/pokeball_icon__by_kurisutikyo-d49v0cn.gif');
+    background-size: 21px 21px;
+    background-repeat: no-repeat;
+    width: 21px;
+    height: 21px;
+    width: 100%;
+    background-position: center;
+    margin: 0px;
+}
+.costumPopup p {
+    margin: 0px;
+    font-weight: 900;
+}
 
 #map-canvas{
     min-height: 600px;

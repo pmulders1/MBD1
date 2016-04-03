@@ -22,7 +22,8 @@ function PokedexController(initcallback){
 
             // Loop trough results and add them to the model.
             $.each(result.results, function(index, item){
-                var pokemon = new PokemonModel()
+                var pokemon = new PokemonModel();
+                pokemon.id = index;
                 pokemon.name = capitalizeFirstLetter(item.name);
                 pokemon.url = item.url;
                 self.model.AddPokemon(pokemon);
@@ -99,7 +100,7 @@ function PokedexController(initcallback){
     
     self.getSinglePokemon = function(index){
         
-        console.log(self.model.pokemons[index].isCached)
+        console.log(self.model.pokemons[index])
         if(!self.model.pokemons[index].isCached){
             apiConnector.GET(self.model.pokemons[index].url, function(result){
                 self.model.pokemons[index].updatePokemon(result);
@@ -117,7 +118,6 @@ function PokedexController(initcallback){
         var index = Math.floor(Math.random() * (151 - 1 + 1)) + 1;
         console.log(index);
         apiConnector.GET('http://pokeapi.co/api/v2/pokemon/' + index, function(result){
-            console.log(result);
             var pokemon = new PokemonModel()
             pokemon.name = capitalizeFirstLetter(result.name);
             pokemon.url = result.url;
@@ -142,6 +142,12 @@ function PokedexController(initcallback){
             
             self.getSinglePokemon($(this).attr('rel'));
          });
+        self.refresh();
+    });
+    
+    // refresh als de pokedex page weergeven wordt
+    $(document).on("pageshow","#pokedex",function(){
+        
         self.refresh();
     });
     

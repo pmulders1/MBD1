@@ -12,7 +12,6 @@ function PokedexController(initcallback){
         self.listview = new PokedexView(self.model);
         self.singleview = new PokemonView();
         // Get innitial list of pokemon.
-        
         if(self.checkCache()){
             self.getFromLocal();
             if(initcallback){
@@ -37,7 +36,8 @@ function PokedexController(initcallback){
 
             // Loop trough results and add them to the model.
             $.each(result.results, function(index, item){
-                var pokemon = new PokemonModel()
+                var pokemon = new PokemonModel();
+                pokemon.pokemonid = index;
                 pokemon.name = capitalizeFirstLetter(item.name);
                 pokemon.url = item.url;
                 self.model.AddPokemon(pokemon);
@@ -108,25 +108,25 @@ function PokedexController(initcallback){
     self.addMore = function(page){
         $(document).off("scrollstop");
         
-        var last = $("li", page).length;
-        var cont = last + self.model.limit - 1;
-        
         if(self.model.pokemons.length < 20){
             $.mobile.loading("show", {
                 text: "loading more..",
                 textVisible: true
             });
             setTimeout(function() {
-                self.listview.DrawMore(page, last, cont);
+                self.listview.DrawMore(page);
                 $.mobile.loading("hide");
             }, 1000);
         }else{
-            self.listview.DrawMore(page, last, cont);
+            self.listview.DrawMore(page);
         }
         $(document).on("scrollstop", self.checkScroll);
     }
     
     self.getSinglePokemon = function(index){
+        console.log(index);
+        console.log(self.model)
+        console.log(self.model.pokemons[index]);
         if(!self.model.pokemons[index].isCached){
             apiConnector.GET(self.model.pokemons[index].url, function(result){
                 self.model.UpdatePokemon(index, result);
@@ -144,7 +144,6 @@ function PokedexController(initcallback){
         var index = Math.floor(Math.random() * (151 - 1 + 1)) + 1;
         console.log(index);
         apiConnector.GET('http://pokeapi.co/api/v2/pokemon/' + index, function(result){
-            console.log(result);
             var pokemon = new PokemonModel()
             pokemon.name = capitalizeFirstLetter(result.name);
             pokemon.url = result.url;

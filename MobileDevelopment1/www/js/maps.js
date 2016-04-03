@@ -50,7 +50,6 @@
         }
 
         function createMarker(place) {
-           console.log(place);
             var marker = new google.maps.Marker({
                 map: map,
                 icon: 'http://orig12.deviantart.net/32d7/f/2011/257/9/d/pokeball_icon__by_kurisutikyo-d49v0cn.gif',
@@ -59,7 +58,7 @@
 
             google.maps.event.addListener(marker, 'click', function() {
 
-            infowindow.setContent('<div><strong>' + capitalizeFirstLetter(place.pokemonModel.name) + '</strong></div>');
+            infowindow.setContent('<div><strong>' + capitalizeFirstLetter(place.pokemonModel.name) + '<br></strong><a id="catchPokemon" rel="' + place.id + '">Catch Pokemon</a></div>');
             infowindow.open(map, this);
             });
         };

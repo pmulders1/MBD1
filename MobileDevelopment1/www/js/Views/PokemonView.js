@@ -8,7 +8,11 @@ function PokemonView(){
         $('#pokemon-sprite').css('background-image', 'url(' + self.model.sprite + ')');
         $('#pokemon-name').html(self.model.name);
         
-        $('#pokemon-stats').append('<tr><td><strong>Width</strong></td><td>' + self.model.weight + '</td></tr>');
+        if(self.model.isCatched){
+            $('#catched').append("<p class='pokemonCatched'></p>");
+        }
+    
+        $('#pokemon-stats').append('<tr><td><strong>Weight</strong></td><td>' + self.model.weight + '</td></tr>');
         $('#pokemon-stats').append('<tr><td><strong>Height</strong></td><td>' + self.model.height + '</td></tr>');
         
         $.each(self.model.stats, function(index, item){

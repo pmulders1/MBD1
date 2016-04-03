@@ -1,7 +1,8 @@
 function PokemonModel(){
 	var self = this;
 
-	//Members
+	//Memberss
+    self.pokemonid = null;
 	self.name = null;
     self.url = null;
     self.isCached = false;

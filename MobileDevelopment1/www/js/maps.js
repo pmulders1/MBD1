@@ -43,7 +43,6 @@
 
         function callback(results, status) {
             if (status === google.maps.places.PlacesServiceStatus.OK) {
-                console.log('hi');
                 for (var i = 0; i < geoCachingController.model.caches.length; i++) {
                     createMarker(geoCachingController.model.caches[i]);
                 }

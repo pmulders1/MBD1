@@ -12,7 +12,22 @@ function PokedexController(initcallback){
         self.listview = new PokedexView(self.model);
         self.singleview = new PokemonView();
         // Get innitial list of pokemon.
-		self.getAllPokemon(initcallback);
+        
+        if(self.checkCache()){
+            self.getFromLocal();
+            if(initcallback){
+                initcallback();
+            }
+        } else {
+            self.getAllPokemon(function(){
+                
+                if(initcallback){
+                    initcallback();
+                }
+                
+                self.saveToLocal();
+            });
+        }
 	}
 
 	self.getAllPokemon = function(callback){
@@ -27,10 +42,6 @@ function PokedexController(initcallback){
                 pokemon.url = item.url;
                 self.model.AddPokemon(pokemon);
             });
-            
-            
-            //self.cacheData();
-            console.log(window.localStorage.getItem("pokemons"));
 
             if(callback){
                callback(); 
@@ -38,13 +49,31 @@ function PokedexController(initcallback){
         });
 	};
     
-    self.cacheData = function(){
+    self.saveToLocal = function(){
+        var temp = new Date();
+        var date = new Date(temp.setHours(temp.getHours() + 2));
+        
+        window.localStorage.setItem("pokemonsTime", date);
+        window.localStorage.setItem("pokemons", JSON.stringify(self.model.pokemons));
+    };
+    
+    self.getFromLocal = function(){
+        self.model.pokemons = JSON.parse(window.localStorage.getItem("pokemons"));
+    }
+    
+    self.checkCache = function(){
         var time = window.localStorage.getItem("pokemonsTime");
-        if(time != null && new Date(time) > new Date()){
-            
+        
+        if(time == null){
+            // data niet gezet.. ga maa api call doen en daarna tijd/data op local storage
+            return false;
+        }
+
+        if(new Date(time) < new Date()){
+            // Tijd voorbij. doe maar api call en save data.
+            return false;
         } else {
-            
-            window.localStorage.setItem("pokemonsTime", date);
+            return true;
         }
     }
 
@@ -98,11 +127,9 @@ function PokedexController(initcallback){
     }
     
     self.getSinglePokemon = function(index){
-        
-        console.log(self.model.pokemons[index].isCached)
         if(!self.model.pokemons[index].isCached){
             apiConnector.GET(self.model.pokemons[index].url, function(result){
-                self.model.pokemons[index].updatePokemon(result);
+                self.model.UpdatePokemon(index, result);
                 $.mobile.pageContainer.pagecontainer("change", "singlepokemon.html");  
                 self.singleview.setModel(self.model.pokemons[index]);
             });

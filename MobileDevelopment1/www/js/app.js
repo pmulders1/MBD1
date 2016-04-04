@@ -56,8 +56,25 @@ function onAppReady() {
 document.addEventListener("app.Ready", onAppReady, false);
 
 $(document).on("pageshow","#settings",function(){
+    var firstName = window.localStorage.getItem('firstname');
+    console.log(firstName);
+    var lastName = window.localStorage.getItem('lastname');
+    console.log(lastName);
+    if(firstName){
+        $('#firstName').val(firstName);
+    }
+    if(lastName){
+        $('#lastName').val(lastName);
+    }
+    
     $(document).on("tap","#clearCache",function(){
         window.localStorage.clear();
+        $('.confirmDialog').toggle();
+        $('.dialogContent').html('Cache is cleared!');
+        setTimeout(function(){
+            $('.confirmDialog').toggle();
+            $('.dialogContent').html('');
+        }, 3000);
     });
     
     $(document).on("tap","#externalApiLink",function(){
@@ -65,6 +82,14 @@ $(document).on("pageshow","#settings",function(){
     });
 });
 
+$(document).on("pagebeforehide", "#settings", function(){
+    window.localStorage.setItem('firstname', $('#firstName').val());
+    window.localStorage.setItem('lastname', $('#lastName').val());
+});
+$( window ).unload(function() {
+    window.localStorage.setItem('firstname', $('#firstName').val());
+    window.localStorage.setItem('lastname', $('#lastName').val());
+});
 // Public functions
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);

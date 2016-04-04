@@ -5,6 +5,9 @@ function PokedexModel(){
     self.pokemons = [];
     self.catchedPokemon = [];
     
+    self.current = 0;
+    self.limit = 20;
+    
 	//Constructor
 	self.init = function(){
         

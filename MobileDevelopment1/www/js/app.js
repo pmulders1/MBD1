@@ -36,6 +36,8 @@ function onAppReady() {
         navigator.splashscreen.hide() ;
     }
     
+    $(document).on('swipeleft', goBack);
+    
     $.mobile.loading("show", {
         text: "Please wait for innitial data...",
         textVisible: true
@@ -61,7 +63,7 @@ $(document).on("pageshow","#settings",function(){
     });
     
     $(document).on("tap","#externalApiLink",function(){
-        intel.xdk.device.launchExternal('http://pokeapi.co/');
+        intel.xdk.device.launchExternal('http://www.intel.com');
     });
 });
 
@@ -72,6 +74,27 @@ function capitalizeFirstLetter(string) {
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function goBack(event){
+    event.preventDefault();
+    var url = "";
+    switch(event.target.id){
+        case "single":
+            url = "index.html";
+            break;
+        case "singlepokemon":
+            url = "pokedex.html";
+            break;
+        case "joupokemon":
+            url = "index.html";
+            break;
+        case "vangpokemon":
+            url = "index.html";
+            break;
+    }
+    
+    $.mobile.pageContainer.pagecontainer("change", url);
 }
 
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {

@@ -38,7 +38,7 @@ function GeoCachingController(callback){
     };
     
     $(document).on("pageshow","#vangpokemon",function(){
-        $('#map-canvas').on('click', '#catchPokemon', function (event) {
+        $('#map-canvas').on('tap', '#catchPokemon', function (event) {
             event.preventDefault();
             var index = $(this).attr('rel');
             var location;

@@ -186,7 +186,7 @@ function PokedexController(initcallback){
     // refresh als de pokedex page weergeven wordt
     $(document).on("pageshow","#pokedex",function(){
         $(document).on("scrollstop", self.checkScroll);
-        $('#pokedexContainer').on('click', '#single', function (event) {
+        $('#pokedexContainer').on('tap', '#single', function (event) {
             //event.preventDefault();
             //event.stopPropagation();
             

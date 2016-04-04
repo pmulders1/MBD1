@@ -59,6 +59,10 @@ $(document).on("pageshow","#settings",function(){
     $(document).on("tap","#clearCache",function(){
         window.localStorage.clear();
     });
+    
+    $(document).on("tap","#externalApiLink",function(){
+        intel.xdk.device.launchExternal('http://pokeapi.co/');
+    });
 });
 
 // Public functions

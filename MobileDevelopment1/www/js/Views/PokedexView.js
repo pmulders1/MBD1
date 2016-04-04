@@ -12,7 +12,7 @@ function PokedexView(model){
                 if(self.model.pokemons[i].isCatched){
                     str = "<span class='isCatched'></span>"
                 }
-                items += "<li><a id='single' rel='" + i.toString() + "'>" + self.model.pokemons[i].name + str + "</a></li>";
+                items += "<li><a id='single' href='singlepokemon.html' rel='" + i.toString() + "'>" + self.model.pokemons[i].name + str + "</a></li>";
             } else {
                 return;
             }
@@ -31,7 +31,7 @@ function PokedexView(model){
                 if(self.model.pokemons[i].isCatched){
                     str = "<span class='isCatched'></span>"
                 }
-                items += "<li><a id='single' rel='" + i.toString() + "'>" + self.model.pokemons[i].name + str + "</a></li>";
+                items += "<li><a id='single' href='singlepokemon.html' rel='" + i.toString() + "'>" + self.model.pokemons[i].name + str + "</a></li>";
             } else {
                 return;
             }

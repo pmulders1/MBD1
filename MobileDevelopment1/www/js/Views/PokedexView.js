@@ -22,7 +22,7 @@ function PokedexView(model){
     
     self.DrawMore = function(page){
         var items = '';
-        var last = $("li", page).length;
+        var last = $("li", page).length - 1;
         console.log(last);
         for (var i = last; i < last + 5; i++) {
             if(self.model.pokemons[i]){

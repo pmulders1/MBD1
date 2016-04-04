@@ -3,6 +3,7 @@ function PokedexModel(){
 
 	//Members
     self.pokemons = [];
+    self.catchedPokemon = [];
     
 	//Constructor
 	self.init = function(){
@@ -11,6 +12,10 @@ function PokedexModel(){
     
     self.AddPokemon = function(pokemon){
         self.pokemons.push(pokemon);   
+    }
+    
+    self.AddCatchedPokemon = function(index){
+        self.catchedPokemon.push(index);
     }
     
     self.UpdatePokemon = function(index, data){

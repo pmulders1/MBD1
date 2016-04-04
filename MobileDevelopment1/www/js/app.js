@@ -55,6 +55,12 @@ function onAppReady() {
 }
 document.addEventListener("app.Ready", onAppReady, false);
 
+$(document).on("pageshow","#settings",function(){
+    $(document).on("tap","#clearCache",function(){
+        window.localStorage.clear();
+    });
+});
+
 // Public functions
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);

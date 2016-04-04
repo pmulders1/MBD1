@@ -11,7 +11,11 @@ function PokedexController(initcallback){
         self.model = new PokedexModel();
         self.listview = new PokedexView(self.model);
         self.singleview = new PokemonView();
+        
+        //intel.xdk.device.launchExternal('http://www.intel.com');
+        
         // Get innitial list of pokemon.
+        self.getCatchedPokemonFromLocal();
         if(self.checkCache()){
             self.getFromLocal();
             if(initcallback){
@@ -30,7 +34,7 @@ function PokedexController(initcallback){
 	}
 
 	self.getAllPokemon = function(callback){
-
+        console.log("get data from webs")
         // Do the api call based on offset and limit.
         apiConnector.GETALL(0, 721, function(result){
 
@@ -42,6 +46,8 @@ function PokedexController(initcallback){
                 pokemon.url = item.url;
                 self.model.AddPokemon(pokemon);
             });
+            
+            self.syncListOfCatchedPokemon();
 
             if(callback){
                callback(); 
@@ -59,6 +65,8 @@ function PokedexController(initcallback){
     
     self.getFromLocal = function(){
         self.model.pokemons = JSON.parse(window.localStorage.getItem("pokemons"));
+        console.log("get data from local")
+        self.syncListOfCatchedPokemon();
     }
     
     self.checkCache = function(){
@@ -124,9 +132,6 @@ function PokedexController(initcallback){
     }
     
     self.getSinglePokemon = function(index){
-        console.log(index);
-        console.log(self.model)
-        console.log(self.model.pokemons[index]);
         if(!self.model.pokemons[index].isCached){
             apiConnector.GET(self.model.pokemons[index].url, function(result){
                 self.model.UpdatePokemon(index, result);
@@ -142,7 +147,6 @@ function PokedexController(initcallback){
     
     self.getRandomPokemon = function(callback){
         var index = Math.floor(Math.random() * (151 - 1 + 1)) + 1;
-        console.log(index);
         apiConnector.GET('http://pokeapi.co/api/v2/pokemon/' + index, function(result){
             var pokemon = new PokemonModel()
             pokemon.name = capitalizeFirstLetter(result.name);
@@ -153,6 +157,31 @@ function PokedexController(initcallback){
             }
         });
     };
+    
+    self.registerCatchedPokemon = function(index){
+        console.log("Register pokemon" + index);
+        if(window.localStorage.getItem("catchedPokemon")){
+            this.model.catchedPokemon = JSON.parse(window.localStorage.getItem("catchedPokemon"));
+            console.log('Cached pokemon #'+index);
+        }
+        this.model.AddCatchedPokemon(index);
+        window.localStorage.setItem("catchedPokemon", JSON.stringify(this.model.catchedPokemon));
+        
+        console.log(this.model.catchedPokemon);
+    }
+    
+    self.getCatchedPokemonFromLocal = function(){
+        if(window.localStorage.getItem("catchedPokemon")){
+            this.model.catchedPokemon = JSON.parse(window.localStorage.getItem("catchedPokemon"));
+        }
+    }
+    
+    self.syncListOfCatchedPokemon = function(){
+        $.each(self.model.catchedPokemon, function(index, item){
+            self.model.pokemons[item].isCatched = true;
+        });
+        
+    }
     
     // refresh als de pokedex page weergeven wordt
     $(document).on("pageshow","#pokedex",function(){

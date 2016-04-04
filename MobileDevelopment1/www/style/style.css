@@ -1,3 +1,15 @@
+.floatLeft{
+    float: left;
+}
+.floatRigth{
+    float: right;
+}
+.lineHeight60{
+    line-height: 60px;
+}
+.width90{
+    width: 90px;
+}
 .backButton{
     text-decoration: none;
     text-align: right;

@@ -56,6 +56,7 @@ function GeoCachingController(callback){
             if(distance < 50){
                 self.model.caches[index].pokemonModel.isCatched = true;
                 pokedexController.getSinglePokemon(self.model.caches[index].pokemonModel.pokemonid);
+                pokedexController.registerCatchedPokemon(self.model.caches[index].pokemonModel.pokemonid);
             }else{
                 $('.costumPopup').html('<p>You are not close enough!</p><p>Get closer and try again</p>').fadeToggle( "slow", "linear" );
                 

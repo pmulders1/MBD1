@@ -78,6 +78,13 @@
     height: 21px;
     float: right;
 }
+.confirmDialog{
+    display: none;
+}
+.dialogContent{
+    padding: 30px 15px;
+    text-align: center;
+}
 .pokemonCatched{
     background-image: url('http://orig12.deviantart.net/32d7/f/2011/257/9/d/pokeball_icon__by_kurisutikyo-d49v0cn.gif');
     background-size: 21px 21px;
@@ -92,7 +99,10 @@
     margin: 0px;
     font-weight: 900;
 }
-
+.row{
+    padding-bottom: 10px;
+    min-height: 60px;
+}
 #map-canvas{
     min-height: 600px;
 }

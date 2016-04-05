@@ -56,10 +56,7 @@ function onAppReady() {
     });
 }   
 document.addEventListener("app.Ready", onAppReady, false);
-$(document).on("pageshow", "#joupokemon", function(){
-    
-    
-});
+
 $(document).on("pageshow","#settings",function(){
     checkLanguage();
     var firstName = window.localStorage.getItem('firstname');
@@ -103,13 +100,7 @@ function capitalizeFirstLetter(string) {
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-function checkLanguage() {
-    console.log('ho');
-      navigator.globalization.getPreferredLanguage(
-        function (language) {console.log('language: ' + language.value + '\n');},
-        function () {console.log('Error getting language\n');}
-      );
-    }
+
 function goBack(event){
     event.preventDefault();
     var url = "";

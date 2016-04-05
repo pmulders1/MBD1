@@ -5,7 +5,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "jsapp/template-blank-cordova-project-lite/sample.zip",
       "projectGuid": "3694475f-1477-4a6d-b9ff-52d4e8d9dfd0",
-      "lastModifiedDate": 1459861126910,
+      "lastModifiedDate": 1459862324506,
       "creationDate": 1458986441746
     },
     "XDK-app-designer": "false",
@@ -190,7 +190,7 @@
           "deployment-target": "6"
         },
         "isActive_": true,
-        "appName_": "MobileDevelopment1",
+        "appName_": "Pokedex",
         "appID_": "xdk.intel.cordova.template.lite",
         "appAccess_": {
           "mode": "whitelist",

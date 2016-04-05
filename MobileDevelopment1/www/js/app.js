@@ -54,10 +54,13 @@ function onAppReady() {
             $(document).unbind('pagebeforechange');
         });
     });
-}
+}   
 document.addEventListener("app.Ready", onAppReady, false);
-
+$(document).on("pageshow", "#joupokemon", function(){
+    window.open('http://google.com/maps?//daddr=51.821374,5.563648', '_system', 'location=yes'); 
+});
 $(document).on("pageshow","#settings",function(){
+    checkLanguage();
     var firstName = window.localStorage.getItem('firstname');
     var lastName = window.localStorage.getItem('lastname');
 
@@ -79,11 +82,8 @@ $(document).on("pageshow","#settings",function(){
     });
     
     $(document).on("tap","#externalApiLink",function(){
-        intel.xdk.device.launchExternal('http://www.intel.com');
+        window.open('http://pokeapi.co/', '_system', 'location=yes');
     });
-    
-    var url = "http://google.com/maps?//daddr=51.821374,5.563648";
-    intel.xdk.device.launchExternal(url);
 });
 
 $(document).on("pagebeforehide", "#settings", function(){
@@ -102,7 +102,13 @@ function capitalizeFirstLetter(string) {
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
+function checkLanguage() {
+    console.log('ho');
+      navigator.globalization.getPreferredLanguage(
+        function (language) {console.log('language: ' + language.value + '\n');},
+        function () {console.log('Error getting language\n');}
+      );
+    }
 function goBack(event){
     event.preventDefault();
     var url = "";

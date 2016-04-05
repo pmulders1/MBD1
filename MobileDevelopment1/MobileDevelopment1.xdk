@@ -5,7 +5,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "jsapp/template-blank-cordova-project-lite/sample.zip",
       "projectGuid": "3694475f-1477-4a6d-b9ff-52d4e8d9dfd0",
-      "lastModifiedDate": 1459848317591,
+      "lastModifiedDate": 1459853966522,
       "creationDate": 1458986441746
     },
     "XDK-app-designer": "false",
@@ -75,7 +75,8 @@
         "gitref": "",
         "name": "Splashscreen",
         "description": "Cordova Splashscreen Plugin",
-        "checksum": "a7fdb6d9"
+        "checksum": "a7fdb6d9",
+        "cordovaVersion": ">=3.1.0"
       },
       {
         "id": "cordova-plugin-geolocation",
@@ -138,6 +139,43 @@
         "topLevel": true,
         "permissions": {},
         "description": "Cordova Notification Plugin",
+        "data": {},
+        "dependedBy": []
+      },
+      {
+        "id": "cordova-plugin-globalization",
+        "name": "Globalization",
+        "version": "1.0.2",
+        "originType": "cordova.io",
+        "origin": "cordova-plugin-globalization",
+        "gitref": "",
+        "paramvals": {},
+        "sourceLocation": "plugins/cordova-plugin-globalization",
+        "selectedState": "Included",
+        "checksum": "5d6eb3c",
+        "dependsOn": [],
+        "topLevel": true,
+        "permissions": {},
+        "description": "Cordova Globalization Plugin",
+        "data": {},
+        "dependedBy": []
+      },
+      {
+        "id": "cordova-plugin-inappbrowser",
+        "name": "InAppBrowser",
+        "version": "1.1.0",
+        "originType": "cordova.io",
+        "origin": "cordova-plugin-inappbrowser",
+        "gitref": "",
+        "paramvals": {},
+        "sourceLocation": "plugins/cordova-plugin-inappbrowser",
+        "selectedState": "Included",
+        "checksum": "20096ffc",
+        "dependsOn": [],
+        "topLevel": true,
+        "cordovaVersion": ">=3.1.0",
+        "permissions": {},
+        "description": "Cordova InAppBrowser Plugin",
         "data": {},
         "dependedBy": []
       }

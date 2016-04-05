@@ -61,7 +61,7 @@ function onAppReady() {
             $(document).unbind('pagebeforechange');
         });
     });
-}
+}   
 document.addEventListener("app.Ready", onAppReady, false);
 
 $(document).on("pageshow","#settings",function(){
@@ -71,15 +71,14 @@ $(document).on("pageshow","#settings",function(){
             window.lang.change(this.value);
         }
     });
-    
+
     var firstName = window.localStorage.getItem('firstname');
-    console.log(firstName);
     var lastName = window.localStorage.getItem('lastname');
-    console.log(lastName);
-    if(firstName){
+
+    if(firstName !== 'undefined'){
         $('#firstName').val(firstName);
     }
-    if(lastName){
+    if(lastName !== 'undefined'){
         $('#lastName').val(lastName);
     }
     
@@ -94,7 +93,7 @@ $(document).on("pageshow","#settings",function(){
     });
     
     $(document).on("tap","#externalApiLink",function(){
-        intel.xdk.device.launchExternal('http://www.intel.com');
+        window.open('http://pokeapi.co/', '_system', 'location=yes');
     });
 });
 

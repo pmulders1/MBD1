@@ -45,11 +45,19 @@
 <body>
 
     <div data-role="page" id="main">
-        <ul data-role="listview" id="pokemonList" data-inset="true" class="ui-icon-alt ui-listview ui-listview-inset ui-corner-all ui-shadow">
-            <li><a id="pokedex" href="pokedex.html" class="ui-link-inherit"><span lang="en">View Pokedex</span></a></li>
-            <li><a id="vangpokemon" href="vangpokemon.html" class="ui-link-inherit"><span lang="en">Catch Pokemon</span></a></li>
-            <li><a id="settings" href="settings.html" class="ui-link-inherit"><span lang="en">Settings</span></a></li>
-         </ul>
+        <div class="homeButtons">
+            <table>
+            <tr>
+                <td><div class="customButton"><a id="pokedex" href="pokedex.html" class="alignMiddle"><span lang="en">View Pokedex</span></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="customButton"><a id="vangpokemon" href="vangpokemon.html" class="alignMiddle"><span lang="en">Catch Pokemon</span></a></div></td>
+            </tr>
+            <tr>
+                <td><div class="customButton"><a id="settings" href="settings.html" class="alignMiddle"><span lang="en">Settings</span></a></div></td>
+            </tr>    
+            </table>
+        </div>
     </div>
 </body>
 </html>

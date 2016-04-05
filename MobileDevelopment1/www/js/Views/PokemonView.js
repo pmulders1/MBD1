@@ -18,7 +18,6 @@ function PokemonView(){
         $.each(self.model.stats, function(index, item){
             $('#pokemon-stats').append('<tr><td><strong>' + capitalizeFirstLetter(item.stat.name) + '</strong></td><td>' + item.base_stat + '</td></tr>');
         });
-        console.log(self.model.types);
         $.each(self.model.types, function(index, item){
          $('#pokemon-types').append('<div id="types" class="type-' + item.type.name + '"></div>');
         });

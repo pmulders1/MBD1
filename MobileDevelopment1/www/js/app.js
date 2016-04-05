@@ -81,6 +81,9 @@ $(document).on("pageshow","#settings",function(){
     $(document).on("tap","#externalApiLink",function(){
         intel.xdk.device.launchExternal('http://www.intel.com');
     });
+    
+    var url = "http://google.com/maps?//daddr=51.821374,5.563648";
+    intel.xdk.device.launchExternal(url);
 });
 
 $(document).on("pagebeforehide", "#settings", function(){

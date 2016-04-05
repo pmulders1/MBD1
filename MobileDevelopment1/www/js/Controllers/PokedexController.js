@@ -100,25 +100,6 @@ function PokedexController(initcallback){
         }
     }
     
-    self.refreshSingle = function(index){
-        console.log(index);
-        if(self.model.pokemons[index].isCached){
-            console.log("pokemon is gecached");
-            self.singleview.Draw();
-        } else {
-            $.mobile.loading("show", {
-                text: "loading...",
-                textVisible: true
-            });
-            setTimeout(function() {
-                self.singleview.Draw();
-                console.log('hiii')
-                 $.mobile.loading("hide");
-            }, 1000);
-           
-        }
-    }
-    
     self.checkScroll = function(){
         var activePage = $.mobile.pageContainer.pagecontainer("getActivePage"),
         screenHeight = $.mobile.getScreenHeight(),
@@ -151,6 +132,7 @@ function PokedexController(initcallback){
     }
     
     self.getSinglePokemon = function(index, callback){
+        console.log(self.model.pokemons[index]);
         if(!self.model.pokemons[index].isCached){
             apiConnector.GET(self.model.pokemons[index].url, function(result){
                 self.model.UpdatePokemon(index, result);
@@ -207,26 +189,28 @@ function PokedexController(initcallback){
         
     }
     
+    var tempindex;
     // refresh als de pokedex page weergeven wordt
     $(document).on("pageshow","#pokedex",function(){
         $(document).on("scrollstop", self.checkScroll);
         $('#pokedexContainer').on('tap', '#single', function (event) {
             //event.preventDefault();
             //event.stopPropagation();
-            var index = $(this).attr('rel');
-            
-            $(document).on("pageshow", "#singlepokemon", function(){
-                $.mobile.loading("show", {
-                    text: "loading more..",
-                    textVisible: true
-                });
-                self.getSinglePokemon(index, function(){
-                    $.mobile.loading("hide");
-                    console.log("CALLBACK!!!")
-                });
-            });
+            tempindex = $(this).attr('rel');
          });
         self.refresh();
+    });
+    
+    $(document).on("pageshow", "#singlepokemon", function(){
+        console.log('hoooii');
+        $.mobile.loading("show", {
+            text: "loading more..",
+            textVisible: true
+        });
+        self.getSinglePokemon(tempindex, function(){
+            $.mobile.loading("hide");
+            console.log("CALLBACK!!!")
+        });
     });
     
 	self.init(initcallback);

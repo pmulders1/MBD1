@@ -59,13 +59,12 @@ document.addEventListener("app.Ready", onAppReady, false);
 
 $(document).on("pageshow","#settings",function(){
     var firstName = window.localStorage.getItem('firstname');
-    console.log(firstName);
     var lastName = window.localStorage.getItem('lastname');
-    console.log(lastName);
-    if(firstName){
+
+    if(firstName !== 'undefined'){
         $('#firstName').val(firstName);
     }
-    if(lastName){
+    if(lastName !== 'undefined'){
         $('#lastName').val(lastName);
     }
     

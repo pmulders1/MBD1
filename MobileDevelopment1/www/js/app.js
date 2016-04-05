@@ -57,7 +57,8 @@ function onAppReady() {
 }   
 document.addEventListener("app.Ready", onAppReady, false);
 $(document).on("pageshow", "#joupokemon", function(){
-    window.open('http://google.com/maps?//daddr=51.821374,5.563648', '_system', 'location=yes'); 
+    
+    
 });
 $(document).on("pageshow","#settings",function(){
     checkLanguage();

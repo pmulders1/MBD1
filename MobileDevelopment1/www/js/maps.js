@@ -58,7 +58,7 @@
 
             google.maps.event.addListener(marker, 'click', function() {
 
-            infowindow.setContent('<div><strong>' + capitalizeFirstLetter(place.pokemonModel.name) + '<br></strong><a id="catchPokemon" rel="' + place.id + '">Catch Pokemon</a></div>');
+            infowindow.setContent('<div><strong>' + capitalizeFirstLetter(place.pokemonModel.name) + '<br></strong><a id="catchPokemon" rel="' + place.id + '">Catch Pokemon</a><br><a id="navToPokemon" rel="' + place.lat + ',' +place.long + '">Navigate to pokemon</a></div>');
             infowindow.open(map, this);
             });
         };

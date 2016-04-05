@@ -69,6 +69,10 @@ function GeoCachingController(callback){
             });
             
         });
+        $('#map-canvas').on('tap', '#navToPokemon', function (event) {
+            var url = 'http://maps.google.com/maps?daddr=' + $(this).attr('rel');
+            window.open(url, '_system', 'location=yes'); 
+        });
     });
     
 	self.init(callback);

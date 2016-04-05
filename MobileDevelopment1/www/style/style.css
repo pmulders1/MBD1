@@ -109,7 +109,9 @@
 #map-canvas{
     min-height: 600px;
 }
-
+.top15{
+    margin-top: 15px;
+}
 #types{
     margin: 0 auto;
     background-image: url('../images/sprites.png');

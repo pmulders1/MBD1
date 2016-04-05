@@ -1,0 +1,21 @@
+{
+	"token": {
+		"View Pokedex":"Bekijk de Pokedex",
+        "Catch Pokemon":"Vang Pokemon",
+        "Settings":"Instellingen",
+        "Back":"Terug",
+        "Clear cache":"Wis gegevens",
+        "This app is registred to:":"Deze app is toegewezen aan:",
+        "Please select a option":"Selecteer een optie",
+        "Dutch":"Nederlands",
+        "English":"Engels",
+        "Are you a developer and want to create your own pokemon app? Visit":"Ben jij ook een ontwerper en wil je graag je eigen pokedex maken? Bekijk",
+        "for more information.":"voor meer informatie.",
+        "Types:":"Types:",
+        "Stats:":"Eigenschappen",
+        "Pokedex":"Pokedex",
+        "Catch Pokemon":"Vang Pokemon"
+	},
+	"regex": [
+	]
+}

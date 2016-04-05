@@ -20,6 +20,8 @@
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.12.2.min.map"></script>
+    <script src="js/jquery-lang.js" type="text/javascript"></script>
+    
     <script src="cordova.js"></script>
     <script src="js/Helpers/ApiConnector.js"></script>
     <script src="js/app.js"></script>
@@ -36,16 +38,17 @@
     <!-- Controllers -->
     <script src="js/Controllers/PokedexController.js"></script>
     <script src="js/Controllers/GeoCachingController.js"></script>
+    <script type="text/javascript">
+	</script>
 </head>
 
 <body>
 
     <div data-role="page" id="main">
         <ul data-role="listview" id="pokemonList" data-inset="true" class="ui-icon-alt ui-listview ui-listview-inset ui-corner-all ui-shadow">
-            <li><a id="pokedex" href="pokedex.html" class="ui-link-inherit">Bekijk de Pokedex</a></li>
-            <li><a id="joupokemon" href="joupokemon.html" class="ui-link-inherit">Bekijk jouw Pokemons</a></li>
-            <li><a id="vangpokemon" href="vangpokemon.html" class="ui-link-inherit">Vang Pokemon</a></li>
-            <li><a id="settings" href="settings.html" class="ui-link-inherit">Settings</a></li>
+            <li><a id="pokedex" href="pokedex.html" class="ui-link-inherit"><span lang="en">View Pokedex</span></a></li>
+            <li><a id="vangpokemon" href="vangpokemon.html" class="ui-link-inherit"><span lang="en">Catch Pokemon</span></a></li>
+            <li><a id="settings" href="settings.html" class="ui-link-inherit"><span lang="en">Settings</span></a></li>
          </ul>
     </div>
 </body>

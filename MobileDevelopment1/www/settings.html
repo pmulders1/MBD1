@@ -1,16 +1,16 @@
 <div data-role="page" id="settings">
     <div class="header"></div>
     <ul data-role="listview" data-theme="a" >
-        <li>Settings<span><a href="index.html" class="backButton">Back</a></span></li>
+        <li><span lang="en">Settings</span><span><a href="index.html" class="backButton"><span lang="en">Back</span></a></span></li>
     </ul>
     <div role="main" class="ui-content" id="pokedexContainer">
         <div class="row">
-            <span class="floatLeft lineHeight60">Clear Cache</span><div class="floatRigth width90"><input type="button" id="clearCache" value="Clear"></div>
+            <span class="floatLeft lineHeight60"><span lang="en">Clear cache</span></span><div class="floatRigth width90"><input type="button" id="clearCache" value="Clear"></div>
         </div>
         <div class="confirmDialog"><div class="dialogContent"></div></div>
         
         <div class="row">
-            <p>This app is registred to:</p>
+            <p lang="en">This app is registred to:</p>
             <div id="appInfo">
                 <input type="text" id="firstName" placeholder="Jan">
                 <input type="text" id="lastName" placeholder="Jansen">
@@ -18,8 +18,15 @@
         </div>
         
         <div clss="row">
-            <span>Are you a developer and want to create your own pokemon app? Visit <a href="" id="externalApiLink">Pokéapi
-The RESTful Pokémon API</a> for more information.
+            <select id="languageSelect">
+                <option value=""><span lang="en">Please select a option</span></option>
+                <option value="nl"><span lang="en">Dutch</span></option>
+                <option value="en"><span lang="en">English</span></option>
+            </select>
+        </div>
+        
+        <div clss="row">
+            <span lang="en">Are you a developer and want to create your own pokemon app? Visit</span><a href="" id="externalApiLink"> Pokéapi The RESTful Pokémon API </a><span lang="en">for more information.
             </span>
         </div>
     </div>

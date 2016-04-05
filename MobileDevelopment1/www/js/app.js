@@ -30,11 +30,18 @@
 
 var pokedexController = null;
 var geoCachingController = null;
+var currentlang = "en";
 
 function onAppReady() {
     if( navigator.splashscreen && navigator.splashscreen.hide ) {   // Cordova API detected
         navigator.splashscreen.hide() ;
     }
+    
+    window.lang = new Lang();
+    window.lang.dynamic('nl', './lang/nl.json');
+    window.lang.init({
+        defaultLang: 'en'
+    });
     
     $(document).on('swipeleft', goBack);
     
@@ -58,6 +65,13 @@ function onAppReady() {
 document.addEventListener("app.Ready", onAppReady, false);
 
 $(document).on("pageshow","#settings",function(){
+    $("#languageSelect").on("change", function(event){
+        if(this.value != ""){
+            currentlang = this.value;
+            window.lang.change(this.value);
+        }
+    });
+    
     var firstName = window.localStorage.getItem('firstname');
     console.log(firstName);
     var lastName = window.localStorage.getItem('lastname');
